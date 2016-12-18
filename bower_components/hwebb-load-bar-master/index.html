@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>hwebb-load-bar</title>
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <style>
+        body {
+            color: #222;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+
+    <script src="../webcomponentsjs/webcomponents.js"></script>
+    <link rel="import" href="../polymer/polymer.html">
+    <link rel="import" href="hwebb-load-bar.html">
+</head>
+<body unresolved>
+
+<polymer-element name="my-load-bar" constructor="" attributes="">
+    <template>
+
+        <style>
+            code {
+                background-color: whitesmoke;
+                padding: 10px;
+                margin: 10px;
+                display: block;
+            }
+        </style>
+
+        <!-- Default -->
+        <hwebb-load-bar></hwebb-load-bar>
+        <code>
+            &lt;hwebb-load-bar&gt;&lt;/hwebb-load-bar&gt;
+        </code>
+
+        <!-- Option colors -->
+        <hwebb-load-bar colors="['blue','red','green','yellow','purple','orange','magenta']"></hwebb-load-bar>
+        <code>
+            &lt;hwebb-load-bar colors="['blue','red','green','yellow','purple','orange','magenta']"&gt;&lt;/hwebb-load-bar&gt;
+        </code>
+
+        <!-- option duration -->
+        <div id="reload">
+            <hwebb-load-bar duration="10"></hwebb-load-bar>
+        </div>
+        <button on-click="{{reloadDuration}}">Reload</button>
+        <code>
+            &lt;hwebb-load-bar duration="10"&gt;&lt;/hwebb-load-bar&gt;
+        </code>
+
+        <!-- option active -->
+        <hwebb-load-bar active="{{active}}"></hwebb-load-bar>
+        <button on-click="{{toggleActive}}">Toggle Active</button>
+        <code>
+            &lt;hwebb-load-bar active="{{active}}"&gt;&lt;/hwebb-load-bar&gt;
+        </code>
+
+    </template>
+    <script>
+        Polymer('my-load-bar', {
+            active: true,
+            toggleActive: function() {
+                this.active = !this.active;
+            },
+            reloadDuration: function() {
+                this.$.reload.innerHTML = this.$.reload.innerHTML;
+            }
+        });
+    </script>
+</polymer-element>
+
+<my-load-bar></my-load-bar>
+
+
+
+
+</body>
+</html>

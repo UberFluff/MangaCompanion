@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/viewer.css" type="text/css" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <link rel="import" href="bower_components/paper-slider/paper-slider.html" />
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html" />
+    <link rel="import" href="bower_components/iron-icons/iron-icons.html" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700">
+    <script src="js/basic.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div id="Content">
+        <img id="image" src="" />
+    </div>
+    <div id="onTop" class="visible">
+        <paper-icon-button id="iconBack" icon="arrow-back" onclick="window.top.location.href = 'index.html';localStorage.setItem('isComingFromChapter', 1);"></paper-icon-button>
+    </div>
+    <div id="onBot" class="visible">
+        <paper-icon-button id="iconFull" icon="fullscreen" onclick="win.toggleFullscreen();"></paper-icon-button>
+        <paper-slider id="progressBar" pin max="0" step="1" value="0"></paper-slider>
+        <span id="valCountdown"><span id="valCurrentPage">0</span> / <span id="valMaxPage">0</span></span>
+    </div>
+    <script>
+        document.getElementById('image').onclick = function () {
+            toggleVisible();
+        };
+    </script>
+    <script src="js/viewer.js"></script>
+</body>
+
+</html>

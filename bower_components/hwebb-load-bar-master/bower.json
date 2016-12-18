@@ -1,0 +1,13 @@
+{
+    "name": "hwebb-load-bar",
+    "version": "0.1.0",
+    "license": "MIT",
+    "main": "hwebb-load-bar.html",
+    "dependencies": {
+        "polymer": "Polymer/polymer#master"
+    },
+    "homepage": "https://github.com/hwebb/hwebb-load-bar.git",
+    "keywords": [
+        "web-components"
+    ]
+}

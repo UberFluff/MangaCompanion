@@ -1,0 +1,34 @@
+html, body {
+    margin: 0px;
+    padding: 0px;
+}
+
+#main-page-content {
+    position: absolute;
+    width:100%;
+    height:100%;
+}
+
+#paper-input-bg {
+    position: relative;
+    background-color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 2px;
+    visibility: hidden;
+    margin-right: 10px;
+    transition: all .3s;
+}
+
+#search-bar {
+    position: relative;
+    width: 300px;
+}
+
+#toolbar {
+    -webkit-app-region: drag;
+}
+
+.no-drag {
+    -webkit-app-region: no-drag;
+}

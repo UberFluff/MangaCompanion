@@ -1,0 +1,119 @@
+<!--
+This code is free to be used and modified by anyone
+Inspired by the Google loading.
+
+@element hwebb-load-bar
+@author Emmanuel Bourmault <shadowbob45@gmail.com>
+@demo http://hwebb.github.io/bower_components/hwebb-load-bar/
+-->
+
+<!--
+`hwebb-load-bar` Displays a load bar with as many colors as you wish.
+
+Examples:
+
+<hwebb-load-bar></hwebb-load-bar>
+
+Use <Array> `colors` to specify your colors.
+<hwebb-load-bar colors="['#2196F3','#F44336','green','yellow','purple','orange','magenta']"></hwebb-load-bar>
+
+Use <integer> `duration` to set a time when the animation will stop
+<hwebb-load-bar duration="10"></hwebb-load-bar>
+
+Use <boolean> `active` to activate or deactivate the animation
+<hwebb-load-bar active="true"></hwebb-load-bar>
+-->
+
+<link href="../polymer/polymer.html" rel="import">
+
+<polymer-element name="hwebb-load-bar" attributes="colors duration active">
+    <template>
+        <link rel="stylesheet" href="hwebb-load-bar.css">
+
+        <div id="loadBar" class="{{ {active: active} | tokenList }}">
+            <div class="container">
+                <div id="baseLeft" class="base" _style="background-color: {{firstColor}};">
+                    <div id="barLeft" class="bar" _style="width: {{colorsLength * 100}}%; -webkit-animation-duration: {{colorsLength}}s; animation-duration: {{colorsLength}}s;">
+                        <template repeat="{{b in barsAsc}}">
+                            <div _style="background-color: {{b.color}}; width: calc(100% / {{colorsLength}});"></div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div id="baseRight" class="base" _style="background-color: {{firstColor}};">
+                    <div id="barRight" class="bar" _style="width: {{colorsLength * 100}}%; -webkit-animation-duration: {{colorsLength}}s; animation-duration: {{colorsLength}}s;">
+                        <template repeat="{{b in barsDesc}}">
+                            <div _style="background-color: {{b.color}}; width: calc(100% / {{colorsLength}});"></div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </template>
+    <script>
+        Polymer('hwebb-load-bar', {
+
+            firstColor: '',
+            colorsLength: 4,
+            active: true,
+
+            created: function() {
+                this.colors = ['#2196F3','#F44336','#FFEB3B','#4CAF50'];
+                this.transparent = [{color: 'transparent'}];
+                this.bars = [];
+                this.barsAsc = [];
+                this.barsDesc = [];
+            },
+
+            ready: function() {
+                this.initColors();
+                this.setDuration();
+            },
+
+            // Sets all color bars
+            initColors: function() {
+                this.colors.forEach(function(color, i){
+                    if (i == 0) {
+                        this.firstColor = color;
+                    } else {
+                        this.bars.push({color: color});
+                    }
+                }.bind(this));
+
+                this.colorsLength = this.colors.length;
+
+                this.barsAsc = this.transparent.concat(this.bars);
+                this.barsDesc = this.transparent.concat(this.bars.reverse());
+            },
+
+            // If it has a duration limit, ends the animation
+            setDuration: function() {
+                if (this.duration) {
+                    this.job('finished', this.stopAnimation, (this.duration - 1) * 1000);
+                }
+            },
+
+            stopAnimation: function() {
+                // On slower computers it can show a piece of the next color as CSS is faster
+                var finishColor = this.barsAsc[(this.duration - 2) % this.barsAsc.length].color;
+                this.barsAsc.forEach(function(color){
+                    color.color = finishColor;
+                }.bind(this));
+                this.barsDesc.forEach(function(color){
+                    color.color = finishColor;
+                }.bind(this));
+
+                this.$.barLeft.style.webkitAnimationPlayState = 'paused';
+                this.$.barLeft.style.animationPlayState = 'paused';
+                this.$.barRight.style.webkitAnimationPlayState = 'paused';
+                this.$.barRight.style.animationPlayState = 'paused';
+                this.$.baseLeft.style.webkitAnimation = 'load-bar-left-out 1s normal 0s forwards';
+                this.$.baseLeft.style.animation = 'load-bar-left-out 1s normal 0s forwards';
+                this.$.baseRight.style.webkitAnimation = 'load-bar-right-out 1s normal 0s forwards';
+                this.$.baseRight.style.animation = 'load-bar-right-out 1s normal 0s forwards';
+            }
+        });
+    </script>
+</polymer-element>

@@ -1,0 +1,92 @@
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+#Content {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    -webkit-app-region: no-drag;
+}
+
+#onBot {
+    position: fixed;
+    -webkit-app-region: no-drag;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: all .3s;
+}
+
+#progressBar {
+    position: relative;
+    width: 70%;
+    left: 15%;
+    top: 10px;
+    pointer-events: none;
+}
+
+#iconFull {
+    position: fixed;
+    height: 40px;
+    width: 40px;
+    bottom: 5px;
+    left: 5px;
+    color: white;
+}
+
+#image {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    overflow: auto;
+}
+
+#onTop {
+    position: fixed;
+    -webkit-app-region: drag;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.hidden {
+    transition: all .3s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.visible {
+    transition: opacity .3s;
+    opacity: 1;
+    visibility: visible;
+}
+
+#iconBack {
+    -webkit-app-region: no-drag;
+    position: fixed;
+    height: 40px;
+    width: 40px;
+    top: 5px;
+    left: 5px;
+    color: white;
+}
+
+#valCountdown {
+    position: fixed;
+    font-family: 'Roboto';
+    color: white;
+    right: 50px;
+    bottom: 15px;
+}

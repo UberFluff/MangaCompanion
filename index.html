@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MangaCompanion</title>
+    <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
+    <link rel="stylesheet" href="css/mainStyle.css" type="text/css" />
+    <link rel="import" href="bower_components/paper-button/paper-button.html" />
+    <link rel="import" href="bower_components/paper-input/paper-input.html" />
+    <link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html" />
+    <link rel="import" href="bower_components/paper-toast/paper-toast.html" />
+    <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html" />
+    <link rel="import" href="bower_components/iron-icons/iron-icons.html" />
+    <link rel="import" href="bower_components/paper-drawer-panel/paper-drawer-panel.html" />
+    <link rel="import" href="bower_components/paper-header-panel/paper-header-panel.html" />
+    <link rel="import" href="bower_components/paper-material/paper-material.html" />
+    <script src="js/basic.js" type="text/javascript"></script>
+
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+</head>
+
+<body>
+    <paper-drawer-panel force-narrow>
+        <paper-header-panel drawer>
+            <paper-toolbar>
+                <div class="title">Application</div>
+            </paper-toolbar>
+            <div>
+                <!-- A l'intérieur du drawer :D -->
+
+            </div>
+        </paper-header-panel>
+        <paper-header-panel main>
+            <paper-toolbar id="toolbar">
+                <paper-icon-button icon="menu" class="no-drag" id="icon-menu" paper-drawer-toggle></paper-icon-button>
+                <div class="title">My library</div>
+                <paper-material elevation="1" id="paper-input-bg">
+                    <paper-input label="Search" no-label-float class="no-drag" id="search-bar"></paper-input>
+                </paper-material>
+                <paper-icon-button icon="search" class="no-drag" onclick="showBar();"></paper-icon-button>
+                <paper-icon-button icon="close" class="no-drag" onclick="gui.App.quit();"></paper-icon-button>
+            </paper-toolbar>
+            <div>
+                <!-- "Main" contenu :D -->
+                <iframe id="main-page-content" src="mangaCatalog.html" frameborder="0"></iframe>
+            </div>
+        </paper-header-panel>
+    </paper-drawer-panel>
+    <script src="js/setup.js" type="text/javascript"></script>
+    <script>
+        $('#search-bar').on('keydown', function (e) {
+            if (e.which == 13) {
+                localStorage.setItem('searchString', $('#search-bar').val());
+                $('#main-page-content').attr('src', 'mangaSearch.html');
+                var iconMenu = $('#icon-menu');
+                iconMenu.attr("icon", "arrow-back");
+                iconMenu.removeAttr('paper-drawer-toggle');
+                iconMenu.attr('onclick', 'document.getElementById("main-page-content").src="mangaCatalog.html";document.getElementById("paper-input-bg").style.visibility = "hidden"');
+                $('.title').text('Search');
+            }
+        });
+
+        var showBar = function () {
+            if ($('#paper-input-bg').css('visibility') == "hidden") {
+                $('#paper-input-bg').css('visibility', 'visible');
+                $('#search-bar').focus();
+            } else {
+                localStorage.setItem('searchString', $('#search-bar').val());
+                $('#main-page-content').attr('src', 'mangaSearch.html');
+                var iconMenu = $('#icon-menu');
+                iconMenu.attr("icon", "arrow-back");
+                iconMenu.removeAttr('paper-drawer-toggle');
+                iconMenu.attr('onclick', 'document.getElementById("main-page-content").src="mangaCatalog.html";document.getElementById("paper-input-bg").style.visibility = "hidden"');
+                $('.title').text('Search');
+            }
+        };
+        var isComingFromChapter = localStorage.getItem('isComingFromChapter');
+        if(isComingFromChapter == 1) {
+            localStorage.setItem('isComingFromChapter', 0);
+            document.getElementById('main-page-content').setAttribute('src', 'mangaDetails.html');
+        }
+    </script>
+</body>
+
+</html>

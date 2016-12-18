@@ -1,0 +1,8 @@
+{
+    "name": "MangaCompanion",
+    "main": "index.html",
+    "window": {
+        "frame": false
+    },
+    "version" : "0.0.3"
+}

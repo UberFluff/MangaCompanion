@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="css/mangaCatalogStyle.css" type="text/css" />
+    <link rel="import" href="bower_components/paper-spinner/paper-spinner-lite.html" />
+    <link rel="import" href="bower_components/paper-card/paper-card.html" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic,500,500italic,700,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,700">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+</head>
+
+<body>
+    <div id="container-names">
+        <paper-spinner-lite id="spinner-load" active></paper-spinner-lite>
+    </div>
+    <script src="js/searchScraper.js"></script>
+    <script>
+        searchFunction(localStorage.getItem('searchString'), 1);
+        
+        $(document).on('click', '.mangas-cover', function () {
+            //Transforme le boutton menu en fleche retour
+            var iconMenu = $('#icon-menu', parent.document);
+            iconMenu.attr("icon", "arrow-back");
+            iconMenu.removeAttr('paper-drawer-toggle');
+            $('#paper-input-bg', parent.document).css('visibility', 'hidden');
+
+            //Définit les valeurs à retrouver sur MangaDetails
+            localStorage.setItem('mangaUrl', $(this).find('input').val());
+            localStorage.setItem('mangaName', $(this).find('.mangas-title').text())
+            var properUrl = $(this).css('background-image');
+            properUrl = properUrl.replace('url(', '').replace(')', '');
+            properUrl = properUrl.replace(/"/g, '');
+            localStorage.setItem('mangaCoverUrl', properUrl);
+
+            //Redirection vers MangaDetails
+            document.location.href = "mangaDetails.html";
+        });
+    </script>
+</body>
+
+</html>
