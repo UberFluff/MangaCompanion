@@ -1,3 +1,5 @@
+### Not working anymore nor maintained
+
 # MangaCompanion
 
 Here's a simple manga reader made with [nw.js](https://nwjs.io/) and ❤.
